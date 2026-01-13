@@ -12,14 +12,3 @@ target_link_libraries(main PRIVATE Vulkan::Vulkan)
 
 get_target_property(MAIN_INCLUDE_DIRS main INCLUDE_DIRECTORIES)
 message(STATUS "Main target include directories: ${MAIN_INCLUDE_DIRS}")
-
-
-
-
-
-
-
-
-
-
-

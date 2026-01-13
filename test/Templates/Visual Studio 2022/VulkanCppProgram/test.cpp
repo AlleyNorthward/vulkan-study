@@ -1,18 +1,9 @@
-#include <vulkan/vulkan.hpp>
-
 #include <iostream>
 #include <vector>
+#include <vulkan/vulkan.hpp>
 
 int main() {
-  // Use validation layers if this is a debug build
   std::vector<const char *> layers;
-#if defined(_DEBUG)
-  layers.push_back("VK_LAYER_KHRONOS_validation");
-#endif
-
-  // VkApplicationInfo allows the programmer to specifiy some basic information
-  // about the program, which can be useful for layers and tools to provide more
-  // debug information.
   vk::ApplicationInfo appInfo =
       vk::ApplicationInfo()
           .setPApplicationName("Vulkan C++ Program Template")
@@ -21,8 +12,6 @@ int main() {
           .setEngineVersion(1)
           .setApiVersion(VK_API_VERSION_1_0);
 
-  // VkInstanceCreateInfo is where the programmer specifies the layers and/or
-  // extensions that are needed. For now, none are enabled.
   vk::InstanceCreateInfo instInfo =
       vk::InstanceCreateInfo()
           .setFlags(vk::InstanceCreateFlags())
@@ -32,8 +21,8 @@ int main() {
           .setEnabledLayerCount(static_cast<uint32_t>(layers.size()))
           .setPpEnabledLayerNames(layers.data());
 
-  // Create the Vulkan instance.
   vk::Instance instance;
+
   try {
     instance = vk::createInstance(instInfo);
   } catch (std::exception e) {
@@ -42,10 +31,6 @@ int main() {
     return 1;
   }
 
-  // Normally, a program would do something with the instance here. This,
-  // however, is just a simple demo program, so we just finish up right away.
-
   instance.destroy();
-
   return 0;
 }
